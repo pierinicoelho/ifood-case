@@ -11,7 +11,7 @@ project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 from pyspark.sql import SparkSession
 
 from src.config.settings import BRONZE_VOLUME_PATH, TLC_BASE_URL, TARGET_YEARS, TARGET_MONTHS, TAXI_TYPES
-from src.ingestion.ingest_raw import download_taxi_data
+from src.raw.ingest_raw import download_taxi_data
 
 
 
