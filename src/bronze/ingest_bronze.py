@@ -55,15 +55,12 @@ def process_bronze_layer(spark, volume_path: str, table_name: str, taxi_types: l
     for df in all_dfs[1:]:
         df_union = df_union.unionByName(df, allowMissingColumns=True)
 
-    df_bronze = df_union.withColumns({
-        "VendorID": F.col("VendorID").cast("long"),
-        "passenger_count": F.col("passenger_count").cast("long"),
-        "RatecodeID": F.col("RatecodeID").cast("long"),
-        "PULocationID": F.col("PULocationID").cast("long"),
-        "DOLocationID": F.col("DOLocationID").cast("long"),
-        "payment_type": F.col("payment_type").cast("long"),
-        "etl_ingestion_timestamp": F.current_timestamp()
-    })
+    cast_map = {
+        col.name: F.col(col.name).cast(col.cast_to)
+        for col in TAXI_META.columns
+        if col.cast_to is not None
+    }
+    df_bronze = df_union.withColumns({**cast_map, "etl_ingestion_timestamp": F.current_timestamp()})
 
     print(f"Gravando registros na Delta Table: {table_name}...")
 
