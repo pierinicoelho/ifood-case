@@ -1,5 +1,6 @@
 """
 Contratos de metadados (descrições de tabelas e colunas) para aplicação via COMMENT ON no catálogo.
+Separados por camada, descriçoes utilizadas globalmente e upcasting de tipos para compatibilidade entre meses na camada Bronze.
 As descrições de colunas seguem o Data Dictionary oficial da TLC (NYC Taxi & Limousine Commission).
 """
 
