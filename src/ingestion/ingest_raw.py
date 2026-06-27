@@ -5,9 +5,8 @@ Ingere dados da url para o volume S3, atchado ao databricks como external volume
 
 import sys
 import os
-project_root = os.path.abspath(os.path.join(os.getcwd(), '..'))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+
+project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 
 import requests
 from pyspark.dbutils import DBUtils

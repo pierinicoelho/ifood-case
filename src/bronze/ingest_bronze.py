@@ -8,9 +8,7 @@ import os
 import pyspark.sql.functions as F
 from pyspark.sql.types import StructType, TimestampType, StringType, DoubleType
 
-project_root = os.path.abspath(os.path.join(os.getcwd(), '..'))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 
 from src.core.utils import log_execution
 from src.config.table_metadata import TAXI_META, BRONZE_TABLE_COMMENT, TableMeta

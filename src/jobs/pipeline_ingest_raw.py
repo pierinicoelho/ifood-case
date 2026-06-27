@@ -6,9 +6,7 @@ Job para ingestão dos dados brutos a partir da fonte pública do TLC para volum
 import sys
 import os
 
-project_root = os.path.abspath(os.path.join(os.getcwd(), '..'))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 
 from pyspark.sql import SparkSession
 

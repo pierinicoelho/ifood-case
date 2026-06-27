@@ -8,20 +8,28 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class ColumnMeta:
+    """
+    Classe base para descrição de tabelas e colunas.
+    """
+
     name: str
     comment: str
 
 
 @dataclass(frozen=True)
 class TableMeta:
+    """
+    Classe com catalogo unificado de tabelas e colunas.
+    Descriçao de tabelas de acordo com a camada de dados.
+    Descriçao das colunas universal, para todas as camadas.
+    """
+
     columns: list[ColumnMeta] = field(default_factory=list)
 
-
-### Descrições por camada — passadas como parâmetro em cada adapter
 BRONZE_TABLE_COMMENT = (
     "Camada Bronze: dados brutos de viagens de táxi amarelo (Yellow Taxi) da NYC TLC, "
     "ingeridos as-is com upcasting de tipos para compatibilidade entre meses. "
-    "Fonte: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"
+    "Fonte: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf"
 )
 SILVER_TABLE_COMMENT = (
     "Camada Silver: dados de viagens de táxi amarelo limpos e validados estruturalmente. "
@@ -32,8 +40,6 @@ GOLD_TABLE_COMMENT = (
     "conforme requisito do case iFood."
 )
 
-
-### Catálogo único de colunas — compartilhado entre todas as camadas
 TAXI_META = TableMeta(
     columns=[
         ColumnMeta("VendorID",               "Código do provedor TPEP que gerou o registro. 1=Creative Mobile Technologies LLC, 2=Curb Mobility LLC, 6=Myle Technologies Inc, 7=Helix."),
