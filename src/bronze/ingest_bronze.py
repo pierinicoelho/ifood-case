@@ -13,6 +13,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from src.core.utils import log_execution
+from src.config.table_metadata import BRONZE_TAXI_META, TableMeta
 
 
 
@@ -72,8 +73,21 @@ def process_bronze_layer(spark, volume_path: str, table_name: str, taxi_types: l
         df_bronze.write
         .format("delta")
         .mode(write_mode)
-        .option("comment", "Tabela Bronze contendo dados brutos de viagens de táxi, normalizados para Long/Double.")
         .saveAsTable(table_name)
     )
     
+    _apply_table_metadata(spark, table_name, BRONZE_TAXI_META)
+
     print("Ingestão Bronze concluída com sucesso!")
+
+
+def _apply_table_metadata(spark, table_name: str, meta: TableMeta) -> None:
+    """
+    Aplica descrições de tabela e colunas via COMMENT ON no catálogo do Databricks (Unity Catalog).
+    """
+    safe_comment = meta.comment.replace("'", "\\'")
+    spark.sql(f"COMMENT ON TABLE {table_name} IS '{safe_comment}'")
+
+    for col in meta.columns:
+        safe_col_comment = col.comment.replace("'", "\\'")
+        spark.sql(f"ALTER TABLE {table_name} ALTER COLUMN {col.name} COMMENT '{safe_col_comment}'")
