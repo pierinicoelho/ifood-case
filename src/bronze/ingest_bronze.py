@@ -13,7 +13,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from src.core.utils import log_execution
-from src.config.table_metadata import BRONZE_TAXI_META, TableMeta
+from src.config.table_metadata import TAXI_META, BRONZE_TABLE_COMMENT, TableMeta
 
 
 
@@ -76,18 +76,22 @@ def process_bronze_layer(spark, volume_path: str, table_name: str, taxi_types: l
         .saveAsTable(table_name)
     )
     
-    _apply_table_metadata(spark, table_name, BRONZE_TAXI_META)
+    _apply_table_metadata(spark, table_name, TAXI_META, BRONZE_TABLE_COMMENT)
 
     print("Ingestão Bronze concluída com sucesso!")
 
 
-def _apply_table_metadata(spark, table_name: str, meta: TableMeta) -> None:
+def _apply_table_metadata(spark, table_name: str, meta: TableMeta, table_comment: str) -> None:
     """
     Aplica descrições de tabela e colunas via COMMENT ON no catálogo do Databricks (Unity Catalog).
+    Colunas presentes em meta mas ausentes na tabela são ignoradas silenciosamente.
     """
-    safe_comment = meta.comment.replace("'", "\\'")
-    spark.sql(f"COMMENT ON TABLE {table_name} IS '{safe_comment}'")
+    spark.sql(f"COMMENT ON TABLE {table_name} IS '{table_comment.replace(chr(39), chr(92) + chr(39))}'")
+
+    existing_cols = {field.name for field in spark.table(table_name).schema.fields}
 
     for col in meta.columns:
+        if col.name not in existing_cols:
+            continue
         safe_col_comment = col.comment.replace("'", "\\'")
         spark.sql(f"ALTER TABLE {table_name} ALTER COLUMN {col.name} COMMENT '{safe_col_comment}'")

@@ -14,16 +14,27 @@ class ColumnMeta:
 
 @dataclass(frozen=True)
 class TableMeta:
-    comment: str
     columns: list[ColumnMeta] = field(default_factory=list)
 
 
-BRONZE_TAXI_META = TableMeta(
-    comment=(
-        "Camada Bronze: dados brutos de viagens de táxi amarelo (Yellow Taxi) da NYC TLC, "
-        "ingeridos as-is com upcasting de tipos para compatibilidade entre meses. "
-        "Fonte: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"
-    ),
+### Descrições por camada — passadas como parâmetro em cada adapter
+BRONZE_TABLE_COMMENT = (
+    "Camada Bronze: dados brutos de viagens de táxi amarelo (Yellow Taxi) da NYC TLC, "
+    "ingeridos as-is com upcasting de tipos para compatibilidade entre meses. "
+    "Fonte: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"
+)
+SILVER_TABLE_COMMENT = (
+    "Camada Silver: dados de viagens de táxi amarelo limpos e validados estruturalmente. "
+    "Single source of truth para consumo analítico e geração da camada Gold."
+)
+GOLD_TABLE_COMMENT = (
+    "Camada Gold: colunas selecionadas de viagens de táxi amarelo para consumo analítico direto, "
+    "conforme requisito do case iFood."
+)
+
+
+### Catálogo único de colunas — compartilhado entre todas as camadas
+TAXI_META = TableMeta(
     columns=[
         ColumnMeta("VendorID",               "Código do provedor TPEP que gerou o registro. 1=Creative Mobile Technologies LLC, 2=Curb Mobility LLC, 6=Myle Technologies Inc, 7=Helix."),
         ColumnMeta("tpep_pickup_datetime",    "Data e hora em que o taxímetro foi acionado (início da corrida)."),
