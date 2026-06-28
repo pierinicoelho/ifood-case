@@ -1,5 +1,10 @@
-# Dependências do ambiente de execução (Databricks)
-# PySpark e Delta Lake são fornecidos pelo runtime do Databricks — não requerem instalação manual.
-# O pacote abaixo é necessário nos notebooks de análise (visualizações).
+# ── Databricks (instalar manualmente no cluster) ──────────────────────────────
+# PySpark e Delta Lake são fornecidos pelo runtime — não requerem instalação.
+matplotlib  # notebooks de análise (visualizações)
+requests    # src/raw/ingest_raw.py — download dos Parquets TLC
 
-matplotlib
+# ── Execução local (fora do Databricks) ───────────────────────────────────────
+# pyspark>=3.4.0
+# delta-spark>=2.4.0   # versão deve coincidir com a do pyspark
+# pandas               # dependência implícita do .toPandas()
+# pyarrow              # leitura de Parquet
