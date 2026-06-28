@@ -83,5 +83,9 @@ TAXI_META = TableMeta(
         _col("etl_ingestion_timestamp", "Timestamp UTC do momento em que o registro foi processado e gravado na camada Bronze pelo pipeline ETL."),
         _col("year",                    "Ano de início da corrida, derivado de tpep_pickup_datetime. Coluna de particionamento físico da camada Silver."),
         _col("month",                   "Mês de início da corrida, derivado de tpep_pickup_datetime. Coluna de particionamento físico da camada Silver."),
+        _col("pickup_hour",             "Hora de início da corrida (0–23), derivada de tpep_pickup_datetime. Usada para agregação temporal na análise de passageiros por hora (Pergunta 2)."),
+        _col("vendor_desc",             "Descrição do fornecedor TPEP derivada de VendorID via CASE WHEN. Camada Gold."),
+        _col("ratecode_desc",           "Descrição do código de tarifa derivada de RatecodeID via CASE WHEN. Camada Gold."),
+        _col("payment_desc",            "Descrição do método de pagamento derivada de payment_type via CASE WHEN. Camada Gold."),
     ]
 )
