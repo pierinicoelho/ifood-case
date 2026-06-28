@@ -22,7 +22,7 @@ def run_transform_gold_pipeline():
     process_gold_layer(
         spark=spark,
         silver_table=f"{Tables.SCHEMA}.{Tables.SILVER_TAXI}",
-        table_name=f"{Tables.SCHEMA}.{Tables.GOLD_METRICS}",
+        table_name=f"{Tables.SCHEMA}.{Tables.GOLD_TAXI}",
         write_mode=WRITE_MODE_DEFAULT
     )
 

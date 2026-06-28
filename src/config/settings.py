@@ -25,7 +25,7 @@ class Tables:
     SCHEMA = "ifood_taxi_case"
     BRONZE_TAXI = "taxi_bronze"
     SILVER_TAXI = "taxi_silver"
-    GOLD_METRICS = "gold_ifood_metrics"
+    GOLD_TAXI = "taxi_gold"
 
 ### Modo de escrita padrão do pipeline, em DeltaTables
 WRITE_MODE_DEFAULT = "overwrite"
