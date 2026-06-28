@@ -13,6 +13,10 @@ TARGET_YEARS = ["2023"]
 TARGET_MONTHS = ["01", "02", "03", "04", "05"]
 TAXI_TYPES = ["yellow"]
 
+### Range de datas válido para a camada Silver (derivado dos targets acima)
+DATE_MIN = f"{TARGET_YEARS[0]}-{TARGET_MONTHS[0]}-01"
+DATE_MAX = f"{TARGET_YEARS[0]}-{int(TARGET_MONTHS[-1]) + 1:02d}-01"
+
 ### Entrypoint para nomes das tabelas (Delta Tables)
 class Tables:
     """

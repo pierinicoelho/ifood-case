@@ -81,5 +81,7 @@ TAXI_META = TableMeta(
         _col("cbd_congestion_fee",      "Cobrança por corrida na Zona de Alívio de Congestionamento da MTA, vigente a partir de 05/01/2025 (em USD)."),
         _col("source_file_path",        "Caminho do arquivo Parquet de origem no volume S3, adicionado pelo pipeline ETL para rastreabilidade."),
         _col("etl_ingestion_timestamp", "Timestamp UTC do momento em que o registro foi processado e gravado na camada Bronze pelo pipeline ETL."),
+        _col("year",                    "Ano de início da corrida, derivado de tpep_pickup_datetime. Coluna de particionamento físico da camada Silver."),
+        _col("month",                   "Mês de início da corrida, derivado de tpep_pickup_datetime. Coluna de particionamento físico da camada Silver."),
     ]
 )
