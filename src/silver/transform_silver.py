@@ -104,6 +104,7 @@ def _apply_table_metadata(spark, table_name: str, meta: TableMeta, table_comment
     Aplica descrições de tabela e colunas via COMMENT ON no catálogo do Databricks (Unity Catalog).
     Colunas presentes em meta mas ausentes na tabela são ignoradas silenciosamente.
     """
+
     spark.sql(f"COMMENT ON TABLE {table_name} IS '{table_comment.replace(chr(39), chr(92) + chr(39))}'")
 
     existing_cols = {field.name for field in spark.table(table_name).schema.fields}
