@@ -1,0 +1,5 @@
+# Dependências do ambiente de execução (Databricks)
+# PySpark e Delta Lake são fornecidos pelo runtime do Databricks — não requerem instalação manual.
+# O pacote abaixo é necessário nos notebooks de análise (visualizações).
+
+matplotlib
