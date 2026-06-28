@@ -3,7 +3,7 @@ Configurações de path, schemas e constantes.
 """
 
 ### Configurações de path
-BRONZE_VOLUME_PATH = "/Volumes/workspace/ifood_taxi_case/volume_bronze_taxis"
+RAW_VOLUME_PATH = "/Volumes/workspace/ifood_taxi_case/landingzone_raw_taxis"
 
 ### URL base do NYC Taxi and Limousine Commission (TLC)
 TLC_BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data"

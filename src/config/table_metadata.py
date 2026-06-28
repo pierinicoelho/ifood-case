@@ -50,7 +50,6 @@ _BRONZE_CASTS: dict[str, str] = {
     "RatecodeID":      "long",
     "PULocationID":    "long",
     "DOLocationID":    "long",
-    "payment_type":    "long",
 }
 
 

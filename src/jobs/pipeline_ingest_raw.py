@@ -10,7 +10,7 @@ project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 
 from pyspark.sql import SparkSession
 
-from src.config.settings import BRONZE_VOLUME_PATH, TLC_BASE_URL, TARGET_YEARS, TARGET_MONTHS, TAXI_TYPES
+from src.config.settings import RAW_VOLUME_PATH, TLC_BASE_URL, TARGET_YEARS, TARGET_MONTHS, TAXI_TYPES
 from src.raw.ingest_raw import download_taxi_data
 
 
@@ -30,7 +30,7 @@ def run_ingest_raw_pipeline():
                 download_taxi_data(
                     spark_session=spark,
                     base_url=TLC_BASE_URL,
-                    base_path=BRONZE_VOLUME_PATH,
+                    base_path=RAW_VOLUME_PATH,
                     taxi_type=t_type,
                     year=year,
                     month=month

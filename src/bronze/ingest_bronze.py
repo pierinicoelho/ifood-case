@@ -73,8 +73,6 @@ def process_bronze_layer(spark, volume_path: str, table_name: str, taxi_types: l
     
     _apply_table_metadata(spark, table_name, TAXI_META, BRONZE_TABLE_COMMENT)
 
-    print("Ingestão Bronze concluída com sucesso!")
-
 
 def _apply_table_metadata(spark, table_name: str, meta: TableMeta, table_comment: str) -> None:
     """

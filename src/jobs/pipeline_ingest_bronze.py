@@ -9,7 +9,7 @@ import os
 project_root = os.path.abspath(os.path.join(os.getcwd(), '..', '..'))
 
 from src.bronze.ingest_bronze import process_bronze_layer
-from src.config.settings import BRONZE_VOLUME_PATH, Tables, TARGET_YEARS, TARGET_MONTHS, TAXI_TYPES, WRITE_MODE_DEFAULT
+from src.config.settings import RAW_VOLUME_PATH, Tables, TARGET_YEARS, TARGET_MONTHS, TAXI_TYPES, WRITE_MODE_DEFAULT
 
 
 
@@ -21,7 +21,7 @@ def run_ingest_bronze_pipeline():
     
     process_bronze_layer(
         spark=spark,
-        volume_path=BRONZE_VOLUME_PATH,
+        volume_path=RAW_VOLUME_PATH,
         table_name=f"{Tables.SCHEMA}.{Tables.BRONZE_TAXI}",
         taxi_types=TAXI_TYPES,
         years=TARGET_YEARS,
