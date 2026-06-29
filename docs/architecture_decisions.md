@@ -24,7 +24,7 @@ Registro das principais decisões técnicas tomadas ao longo do pipeline. Cada d
 
 **Problema:** Descrições de tabelas e colunas precisam ser aplicadas via Unity Catalog em todas as camadas sem duplicação e sem acoplar configuração ao código de transformação.
 
-**Decisão:** Dataclasses `ColumnMeta` / `TableMeta` (Python puro, sem dependência de PySpark) em [`src/config/table_metadata.py`](src/config/table_metadata.py) centralizam descrições e tipo de cast. Um único `TAXI_META` é compartilhado entre Bronze, Silver e Gold — apenas a descrição da tabela varia por camada (constantes `*_TABLE_COMMENT`). A função `_apply_table_metadata()` filtra silenciosamente colunas ausentes na tabela alvo, tornando o contrato reutilizável independente do schema de cada camada.
+**Decisão:** Dataclasses `ColumnMeta` / `TableMeta` (Python puro, sem dependência de PySpark) em `src/config/table_metadata.py` centralizam descrições e tipo de cast. Um único `TAXI_META` é compartilhado entre Bronze, Silver e Gold — apenas a descrição da tabela varia por camada (constantes `*_TABLE_COMMENT`). A função `_apply_table_metadata()` filtra silenciosamente colunas ausentes na tabela alvo, tornando o contrato reutilizável independente do schema de cada camada.
 
 ---
 
