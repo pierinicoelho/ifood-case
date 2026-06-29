@@ -8,7 +8,7 @@ Registro das principais decisões técnicas tomadas ao longo do pipeline. Cada d
 
 **Problema:** Os Parquets da TLC possuem conflitos severos de tipo entre meses — `passenger_count` como `double` em Janeiro e `bigint` em Fevereiro; inconsistências de capitalização em nomes de colunas. `mergeSchema` falhou no Databricks Serverless por conflitos estruturais irrecuperáveis.
 
-**Decisão:** Contrato de dados estrito via `StructType`. Colunas com conflito tipadas para o maior tamanho físico encontrado (`LongType`) — upcasting seletivo, não universal, para manter rastreabilidade de quais colunas tinham problema real. O contrato de upcasting vive em `_BRONZE_CASTS` no [`src/config/table_metadata.py`](src/config/table_metadata.py), separado das descrições de negócio.
+**Decisão:** Contrato de dados estrito via `StructType`. Colunas com conflito tipadas para o maior tamanho físico encontrado (`LongType`) — upcasting seletivo, não universal, para manter rastreabilidade de quais colunas tinham problema real. O contrato de upcasting vive em `_BRONZE_CASTS` no `src/config/table_metadata.py`, separado das descrições de negócio.
 
 ---
 
