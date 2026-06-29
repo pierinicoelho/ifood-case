@@ -53,9 +53,9 @@ Registro das principais decisões técnicas tomadas ao longo do pipeline. Cada d
 
 | Notebook | Propósito |
 |----------|-----------|
-| [`notebooks/01_raw_to_bronze_eda.ipynb`](notebooks/01_raw_to_bronze_eda.ipynb) | Análise de conflitos de schema entre meses — fundamenta o upcasting da Bronze |
-| [`notebooks/02_bronze_to_silver_eda.ipynb`](notebooks/02_bronze_to_silver_eda.ipynb) | Perfil de qualidade — fundamenta as regras de limpeza da Silver |
-| [`notebooks/03_silver_to_gold_eda.ipynb`](notebooks/03_silver_to_gold_eda.ipynb) | Análise das colunas do case — fundamenta projeção, filtros e enriquecimento da Gold |
+| `notebooks/01_raw_to_bronze_eda.ipynb` | Análise de conflitos de schema entre meses — fundamenta o upcasting da Bronze |
+| `notebooks/02_bronze_to_silver_eda.ipynb` | Perfil de qualidade — fundamenta as regras de limpeza da Silver |
+| `notebooks/03_silver_to_gold_eda.ipynb` | Análise das colunas do case — fundamenta projeção, filtros e enriquecimento da Gold |
 
 ---
 
@@ -75,7 +75,7 @@ Em um cenário produtivo — múltiplos tipos de táxi, múltiplos anos, equipes
 
 **Problema:** As duas perguntas do case consomem subconjuntos distintos da base Silver. A tendência natural seria aplicar filtros de "limpeza" na Gold (`total_amount > 0`, `passenger_count > 0`) para entregar uma tabela mais limpa ao analista.
 
-**Decisão:** Nenhum filtro aplicado na escrita da Gold. A EDA ([`notebooks/03_silver_to_gold_eda.ipynb`](notebooks/03_silver_to_gold_eda.ipynb) , seção c) quantificou a correlação bidirecional entre as duas colunas:
+**Decisão:** Nenhum filtro aplicado na escrita da Gold. A EDA `notebooks/03_silver_to_gold_eda.ipynb` , seção c) quantificou a correlação bidirecional entre as duas colunas:
 
 - Registros com `passenger_count NULL/0` + `total_amount > 0`: receita válida necessária para P1 — filtrar `passenger_count` na camada removeria esses valores da soma mensal.
 - Registros com `total_amount <= 0` + `passenger_count > 0`: corridas reais com chargeback posterior — filtrar `total_amount` na camada removeria passageiros válidos de P2.
