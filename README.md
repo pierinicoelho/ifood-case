@@ -32,6 +32,14 @@ ifood-case/
 
 ---
 
+## Como Importar o Repositório no Databricks
+
+1. No workspace Databricks, acesse **Workspace → Repos → Add Repo**
+2. Cole a URL do repositório: `https://github.com/pierinicoelho/ifood-case`
+3. Após o clone, os arquivos de `src/` estarão disponíveis no caminho do Repo e podem ser referenciados normalmente nos jobs e notebooks
+
+---
+
 ## Configuração
 
 Antes de executar, ajuste [`src/config/settings.py`](src/config/settings.py) conforme seu ambiente:
@@ -44,6 +52,8 @@ TARGET_MONTHS   = ["01", "02", "03", "04", "05"]
 ```
 
 ---
+
+> **Pré-requisito de infraestrutura:** antes de executar os jobs, certifique-se de ter criado o bucket S3, o perfil IAM e o volume no Databricks conforme descrito em [docs/infrastructure_setup.md](docs/infrastructure_setup.md).
 
 ## Como Executar
 
