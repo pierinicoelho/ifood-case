@@ -76,7 +76,7 @@ A solução segue o padrão **Lakehouse Medallion** (Raw → Bronze → Silver �
 
 | Camada | Decisão principal |
 |--------|-------------------|
-| **Bronze** | Upcasting seletivo por contrato de tipos ([`table_metadata.py`](table_metadata.py)) — compatibilidade entre meses com schemas divergentes |
+| **Bronze** | Upcasting seletivo por contrato de tipos ([`table_metadata.py`](src/config/table_metadata.py)) — compatibilidade entre meses com schemas divergentes |
 | **Silver** | Single Source of Truth — 19 colunas preservadas; removidas apenas impossibilidades físicas (dedup, datas inválidas) |
 | **Gold** | Projeção para 13 colunas analíticas + enriquecimento via `CASE WHEN` (sem star schema para o escopo do case) |
 | **Geral** | Particionamento físico por `year/month`; metadados via Unity Catalog (`COMMENT ON TABLE`); escrita idempotente (`overwrite`) |
