@@ -33,7 +33,7 @@ Com o volume configurado, crie o schema que receberá as Delta Tables:
 CREATE SCHEMA IF NOT EXISTS ifood_taxi_case;
 ```
 
-O nome do schema deve coincidir com `Tables.SCHEMA` em [`src/config/settings.py`](src/config/settings.py).
+O nome do schema deve coincidir com `Tables.SCHEMA` em `src/config/settings.py`.
 
 ---
 
@@ -65,7 +65,7 @@ Com o schema criado e o ARN em mãos:
 
 ## 5. Atualização do `settings.py`
 
-Após configurar a infraestrutura, atualize os valores em [`src/config/settings.py`](src/config/settings.py):
+Após configurar a infraestrutura, atualize os valores em `src/config/settings.py`:
 
 ```python
 RAW_VOLUME_PATH = "/Volumes/<catalog>/<schema_volume>/landingzone_raw_taxis"
